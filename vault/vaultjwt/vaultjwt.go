@@ -71,6 +71,7 @@ func (this *VaultJwt) Login(ctx context.Context, client *vault.Client) (secret *
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode > 299 {
 		return nil, errors.New("unexpected status code from vault: " + strconv.Itoa(resp.StatusCode))
 	}
@@ -93,11 +94,11 @@ func getOpenidToken(authEndpoint, authClientId, authClientSecret, authRealm stri
 		log.Println("ERROR: getOpenidToken::PostForm()", err)
 		return nil, err
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		body, _ := ioutil.ReadAll(resp.Body)
 		log.Println("ERROR: getOpenidToken()", resp.StatusCode, string(body))
 		err = errors.New("access denied")
-		resp.Body.Close()
 		return
 	}
 
