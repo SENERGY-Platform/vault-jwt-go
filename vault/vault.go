@@ -67,6 +67,9 @@ func (vault *Vault) Read(key string) (map[string]interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
+	if secret == nil {
+		return nil, errors.New("not found")
+	}
 	data, ok := secret.Data["data"]
 	if !ok {
 		return map[string]interface{}{}, errors.New("unexpected type")

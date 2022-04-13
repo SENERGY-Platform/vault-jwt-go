@@ -73,7 +73,8 @@ func (this *VaultJwt) Login(ctx context.Context, client *vault.Client) (secret *
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode > 299 {
-		return nil, errors.New("unexpected status code from vault: " + strconv.Itoa(resp.StatusCode))
+		body, _ := ioutil.ReadAll(resp.Body)
+		return nil, errors.New("unexpected status code from vault: " + strconv.Itoa(resp.StatusCode) + ", " + string(body))
 	}
 
 	secret = &vault.Secret{}
