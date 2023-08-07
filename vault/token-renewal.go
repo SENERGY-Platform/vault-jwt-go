@@ -28,14 +28,6 @@ func (vault *Vault) manageTokenLifecycle() {
 		if err != nil {
 			log.Println("ERROR: [VAULT] " + err.Error())
 		}
-		vault.loginToken, err = vault.client.Auth().Login(vault.ctx, vault.vaultJwt)
-		if err != nil {
-			log.Println("ERROR: [VAULT] " + err.Error())
-		}
-		if vault.loginToken != nil && !vault.loginToken.Auth.Renewable {
-			log.Println("ERROR: [VAULT] token is not renewable, please check vault config")
-		}
-
 	}
 }
 
