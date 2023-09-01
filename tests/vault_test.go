@@ -18,7 +18,7 @@ package tests
 
 import (
 	"context"
-	"github.com/senergy-platform/vault-jwt-go/vault"
+	"github.com/SENERGY-Platform/vault-jwt-go/vault"
 	"reflect"
 	"testing"
 )

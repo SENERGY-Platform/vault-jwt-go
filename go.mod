@@ -1,4 +1,4 @@
-module github.com/senergy-platform/vault-jwt-go
+module github.com/SENERGY-Platform/vault-jwt-go
 
 go 1.21
 

@@ -20,8 +20,8 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/SENERGY-Platform/vault-jwt-go/vault/vaultjwt"
 	vaultApi "github.com/hashicorp/vault/api"
-	"github.com/senergy-platform/vault-jwt-go/vault/vaultjwt"
 	"net/http"
 	"strconv"
 )
