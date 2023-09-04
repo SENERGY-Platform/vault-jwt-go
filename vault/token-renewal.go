@@ -56,7 +56,7 @@ func (vault *Vault) runTokenWatcher() error {
 			}
 			// This occurs once the token has reached max TTL.
 			log.Printf("INFO: [VAULT] Token can no longer be renewed. Re-attempting login.")
-			return nil
+			return vault.login()
 
 		// Successfully completed renewal
 		case renewal := <-watcher.RenewCh():
@@ -64,4 +64,13 @@ func (vault *Vault) runTokenWatcher() error {
 			vault.loginToken = renewal.Secret
 		}
 	}
+}
+
+func (vault *Vault) login() (err error) {
+	temp, err := vault.client.Auth().Login(vault.ctx, vault.vaultJwt)
+	if err != nil {
+		return err
+	}
+	vault.loginToken = temp
+	return nil
 }
